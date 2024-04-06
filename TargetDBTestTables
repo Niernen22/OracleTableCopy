@@ -1,0 +1,217 @@
+----------------------------------------------------RDWD side--------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------CEL_TABLA_1
+DROP TABLE CEL_TABLA_1;
+
+CREATE TABLE CEL_TABLA_1 (
+       ID NUMBER,
+       NAME VARCHAR2(20),
+       PARTITION_DATE DATE
+       );
+
+SELECT * FROM CEL_TABLA_1;
+
+---------------------------------------------------------------------------------------CEL_TABLA_2
+DROP TABLE CEL_TABLA_2;
+
+CREATE TABLE CEL_TABLA_2 (
+       ID NUMBER,
+       NAME VARCHAR2(20),
+       PARTITION_DATE DATE
+       );
+
+ALTER TABLE CEL_TABLA_2
+MODIFY PARTITION BY LIST (PARTITION_DATE) (
+    PARTITION P_230226 VALUES (TO_DATE('2023-02-26', 'YYYY-MM-DD'))
+);
+SELECT * FROM CEL_TABLA_2;
+
+---------------------------------------------------------------------------------------CEL_TABLA_3
+DROP TABLE CEL_TABLA_3;
+
+CREATE TABLE CEL_TABLA_3 (
+    ID NUMBER,
+    NAME VARCHAR2(20),
+    PARTITION_DATE DATE
+);
+
+ALTER TABLE CEL_TABLA_3
+MODIFY PARTITION BY RANGE (PARTITION_DATE)
+(
+    PARTITION P_230221 VALUES LESS THAN (TO_DATE('2023-02-21', 'YYYY-MM-DD'))
+);
+
+
+SELECT * FROM CEL_TABLA_3;
+---------------------------------------------------------------------------------------CEL_TABLA_4
+DROP TABLE CEL_TABLA_4;
+
+CREATE TABLE CEL_TABLA_4 (
+    ID NUMBER,
+    NAME VARCHAR2(20),
+    PARTITION_NUMBER NUMBER
+);
+
+ALTER TABLE CEL_TABLA_4
+MODIFY PARTITION BY LIST (PARTITION_NUMBER) (
+    PARTITION P_230226 VALUES (230226)
+);
+
+INSERT INTO CEL_TABLA_4 VALUES (6, 'PÉLDA6', 230226);
+
+SELECT * FROM CEL_TABLA_4;
+---------------------------------------------------------------------------------------CEL_TABLA_5
+DROP TABLE CEL_TABLA_5;
+
+CREATE TABLE CEL_TABLA_5 (
+    ID NUMBER,
+    NAME VARCHAR2(20),
+    PARTITION_NUMBER NUMBER
+);
+
+ALTER TABLE CEL_TABLA_5
+MODIFY PARTITION BY RANGE (PARTITION_NUMBER)
+(
+    PARTITION P_230222 VALUES LESS THAN (230222)
+);
+
+--INSERT INTO CEL_TABLA_5 VALUES (6, 'PÉLDA6', 230226);
+--INSERT INTO CEL_TABLA_5 VALUES (5, 'PÉLDA5', 230225);
+INSERT INTO CEL_TABLA_5 VALUES (1, 'PÉLDA1', 230221);
+
+SELECT * FROM CEL_TABLA_5;
+
+---------------------------------------------------------------------------------------CEL_TABLA_61
+DROP TABLE CEL_TABLA_61;
+
+CREATE TABLE CEL_TABLA_61 (
+       ID NUMBER,
+       NAME VARCHAR2(20),
+       TND DATE
+       );
+
+SELECT * FROM CEL_TABLA_61;
+---------------------------------------------------------------------------------------CEL_TABLA_62
+DROP TABLE CEL_TABLA_62;
+
+CREATE TABLE CEL_TABLA_62 (
+       ID NUMBER,
+       NAME VARCHAR2(20),
+       PARTITION_DATE DATE
+       );
+
+SELECT * FROM CEL_TABLA_62;
+---------------------------------------------------------------------------------------CEL_TABLA_7
+DROP TABLE CEL_TABLA_7;
+
+CREATE TABLE CEL_TABLA_7 (
+    ID NUMBER,
+    NAME VARCHAR2(20),
+    TND DATE
+);
+
+ALTER TABLE CEL_TABLA_7
+MODIFY PARTITION BY RANGE (TND)
+(
+    PARTITION P_230221 VALUES LESS THAN (TO_DATE('2023-02-21', 'YYYY-MM-DD'))
+);
+
+SELECT * FROM CEL_TABLA_7;
+---------------------------------------------------------------------------------------CEL_TABLA_8
+DROP TABLE CEL_TABLA_8;
+
+CREATE TABLE CEL_TABLA_8 (
+       ID NUMBER,
+       NAME VARCHAR2(20),
+       TND DATE
+       );
+
+ALTER TABLE CEL_TABLA_8
+MODIFY PARTITION BY LIST (TND) (
+    PARTITION P_230226 VALUES (TO_DATE('2023-02-26', 'YYYY-MM-DD'))
+);
+SELECT * FROM CEL_TABLA_8;
+---------------------------------------------------------------------------------------CEL_TABLA_9
+DROP TABLE CEL_TABLA_9;
+
+CREATE TABLE CEL_TABLA_9 (
+       ID NUMBER,
+       NAME VARCHAR2(20),
+       PARTITION_DATE DATE
+       );
+
+ALTER TABLE CEL_TABLA_9
+MODIFY PARTITION BY LIST (PARTITION_DATE) (
+    PARTITION P_230226 VALUES (TO_DATE('2023-02-26', 'YYYY-MM-DD'))
+);
+SELECT * FROM CEL_TABLA_9;
+---------------------------------------------------------------------------------------CEL_TABLA_10
+DROP TABLE CEL_TABLA_10;
+
+CREATE TABLE CEL_TABLA_10 (
+    ID NUMBER,
+    NAME VARCHAR2(20),
+    PARTITION_DATE DATE
+);
+
+ALTER TABLE CEL_TABLA_10
+MODIFY PARTITION BY RANGE (PARTITION_DATE)
+(
+    PARTITION P_230221 VALUES LESS THAN (TO_DATE('2023-02-21', 'YYYY-MM-DD'))
+);
+
+
+SELECT * FROM CEL_TABLA_10;
+
+---------------------------------------------------------------------------------------CEL_TABLA_11
+DROP TABLE CEL_TABLA_11;
+
+CREATE TABLE CEL_TABLA_11 (
+    ID NUMBER,
+    NAME VARCHAR2(20),
+    TND DATE
+);
+
+ALTER TABLE CEL_TABLA_11
+MODIFY PARTITION BY RANGE (TND)
+(
+    PARTITION P_230221 VALUES LESS THAN (TO_DATE('2023-02-21', 'YYYY-MM-DD'))
+);
+
+
+SELECT * FROM CEL_TABLA_11;
+
+---------------------------------------------------------------------------------------CEL_TABLA_12
+DROP TABLE CEL_TABLA_12;
+
+CREATE TABLE CEL_TABLA_12 (
+    ID NUMBER,
+    NAME VARCHAR2(20),
+    TND DATE
+);
+
+ALTER TABLE CEL_TABLA_12
+MODIFY PARTITION BY RANGE (TND)
+(
+    PARTITION P_230221 VALUES LESS THAN (TO_DATE('2023-02-21', 'YYYY-MM-DD'))
+);
+
+
+SELECT * FROM CEL_TABLA_12;
+---------------------------------------------------------------------------------------CEL_TABLA_13
+DROP TABLE CEL_TABLA_13;
+
+CREATE TABLE CEL_TABLA_13 (
+    ID NUMBER,
+    NAME VARCHAR2(20),
+    TND DATE
+);
+
+ALTER TABLE CEL_TABLA_13
+MODIFY PARTITION BY RANGE (TND)
+(
+    PARTITION P_230221 VALUES LESS THAN (TO_DATE('2023-02-21', 'YYYY-MM-DD'))
+);
+
+
+SELECT * FROM CEL_TABLA_13;
