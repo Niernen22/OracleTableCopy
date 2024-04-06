@@ -1,6 +1,7 @@
 # OracleTableCopy
 Copying a partitioned table from one Oracle database into an other.
-
+Copies a range/list partitioned table, partitioned by date/number datatype column. If tablespace(s) and/or partition(s) are missing, creates them before datacopy. 
+Checks if tables exist in 
 
 Parameters
 
