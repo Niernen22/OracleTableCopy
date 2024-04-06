@@ -17,10 +17,3 @@ p_CEL_TABLA VARCHAR2 -- target table name
 p_TRUNCATE BOOLEAN DEFAULT FALSE -- truncate target table TRUE/FALSE
 
 p_TND_SZURES DATE DEFAULT NULL -- TND filter
-
-Gives error / won't run properly
-- Tables do not exist in databases
-- Tables do not have common columns
-- Tables are differently partitioned
-- Tables partitioned by other than number/date datatype columns
-- The to be copied partition is smaller than the already existing ones and is range partition
