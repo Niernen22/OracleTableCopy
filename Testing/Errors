@@ -1,0 +1,6 @@
+Gives error / won't run properly
+- Tables do not exist in databases
+- Tables do not have common columns
+- Tables are differently partitioned
+- Tables partitioned by other than number/date datatype columns
+- The to be copied partition is smaller than the already existing ones and is range partition
