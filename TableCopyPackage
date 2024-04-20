@@ -448,6 +448,7 @@ END TABLESPACE_CHECK;
 PROCEDURE PARTITION_CURSOR_RANGE (
    p_CEL_SEMA VARCHAR2,
    p_CEL_TABLA VARCHAR2,
+   p_FORRAS_SEMA VARCHAR2,
    p_FORRAS_TABLA VARCHAR2) IS
   v_xml_cursor SYS_REFCURSOR;
   v_PARTITION_NAME VARCHAR2(30);
@@ -459,7 +460,7 @@ PROCEDURE PARTITION_CURSOR_RANGE (
 BEGIN
     OPEN v_xml_cursor FOR
     WITH xmlform AS (
-        SELECT DBMS_XMLGEN.GETXMLTYPE('SELECT PARTITION_NAME, HIGH_VALUE, TABLE_NAME, TABLE_OWNER, TABLESPACE_NAME FROM DBA_TAB_PARTITIONS@ODSDTSCHECK WHERE table_name = ''' || p_FORRAS_TABLA || '''') AS x
+        SELECT DBMS_XMLGEN.GETXMLTYPE('SELECT PARTITION_NAME, HIGH_VALUE, TABLE_NAME, TABLE_OWNER, TABLESPACE_NAME FROM DBA_TAB_PARTITIONS@ODSDTSCHECK WHERE table_name = ''' || p_FORRAS_TABLA || ''' AND table_owner = ''' || p_FORRAS_SEMA || '''') AS x
         FROM dual
     )
     SELECT xmltab.PARTITION_NAME, xmltab.HIGH_VALUE, xmltab.TABLESPACE_NAME
@@ -606,6 +607,7 @@ END TRUNCATE_TND_TABLE;
 PROCEDURE PARTITION_CURSOR_LIST (
    p_CEL_SEMA VARCHAR2,
    p_CEL_TABLA VARCHAR2,
+   p_FORRAS_SEMA VARCHAR2,
    p_FORRAS_TABLA VARCHAR2) IS
   v_xml_cursor SYS_REFCURSOR;
   v_PARTITION_NAME VARCHAR2(30);
@@ -617,7 +619,7 @@ PROCEDURE PARTITION_CURSOR_LIST (
 BEGIN
     OPEN v_xml_cursor FOR
     WITH xmlform AS (
-        SELECT DBMS_XMLGEN.GETXMLTYPE('SELECT PARTITION_NAME, HIGH_VALUE, TABLE_NAME, TABLE_OWNER, TABLESPACE_NAME FROM DBA_TAB_PARTITIONS@ODSDTSCHECK WHERE table_name = ''' || p_FORRAS_TABLA || '''') AS x
+        SELECT DBMS_XMLGEN.GETXMLTYPE('SELECT PARTITION_NAME, HIGH_VALUE, TABLE_NAME, TABLE_OWNER, TABLESPACE_NAME FROM DBA_TAB_PARTITIONS@ODSDTSCHECK WHERE table_name = ''' || p_FORRAS_TABLA || ''' AND table_owner = ''' || p_FORRAS_SEMA || '''') AS x
         FROM dual
     )
     SELECT xmltab.PARTITION_NAME, xmltab.HIGH_VALUE, xmltab.TABLESPACE_NAME
@@ -705,6 +707,7 @@ BEGIN
         );
         -------------PARTITION_CURSOR_RANGE (split? lesz majd ez)
         TABLECOPY_PACKAGE.PARTITION_CURSOR_RANGE (
+        p_FORRAS_SEMA => p_forras_sema,
         p_FORRAS_TABLA => p_forras_tabla,
         p_CEL_SEMA => p_cel_sema,
         p_CEL_TABLA => p_cel_tabla
@@ -720,6 +723,7 @@ BEGIN
         );
         -------------PARTITION_CURSOR_LIST proced ra
         TABLECOPY_PACKAGE.PARTITION_CURSOR_LIST(
+        p_FORRAS_SEMA => p_forras_sema,
         p_FORRAS_TABLA => p_forras_tabla,
         p_CEL_SEMA => p_cel_sema,
         p_CEL_TABLA => p_cel_tabla
@@ -728,9 +732,9 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE('Tables have different or unknown partitioning types.');
     END IF;
 
-    /*EXCEPTION
+    EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE(p_FORRAS_TABLA || ' and/or '|| p_CEL_TABLA || ' is not partitioned.');*/
+        DBMS_OUTPUT.PUT_LINE(p_FORRAS_TABLA || ' and/or '|| p_CEL_TABLA || ' is not partitioned.');
 
 END RANGE_OR_LIST;
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -836,9 +840,9 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE('Tables have different or unknown partitioning types.');
     END IF;
 
-    /*EXCEPTION
+    EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE(p_FORRAS_TABLA || ' and/or '|| p_CEL_TABLA || ' is not partitioned.');*/
+        DBMS_OUTPUT.PUT_LINE(p_FORRAS_TABLA || ' and/or '|| p_CEL_TABLA || ' is not partitioned.');
 
 END RANGE_OR_LIST_TND;
 ---------------------------------------------------------------------------------------------------------------------------------------------------
