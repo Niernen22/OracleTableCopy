@@ -1,0 +1,41 @@
+--tables
+select * from TEST_RUN_LOG;
+select * from step_run_log;
+select * from test_steps;
+select * from tests;
+
+--test plan
+begin
+  test_package.TEST_RUNNER;
+end;
+
+--oracle job run log and details
+select * from DBA_SCHEDULER_JOB_RUN_DETAILS where owner = 'SARTASNADI' order by log_id desc;
+select * from DBA_SCHEDULER_JOB_LOG where owner = 'SARTASNADI' order by log_id desc;
+
+-------------------------------------test_steps sql_code (3 tablecopy and 1 for them procedure)
+select rowid, test_steps.* from test_steps where id = 2;
+BEGIN
+TABLECOPY_PACKAGE.TABLECOPY('STAGE', 'EXIM_XXXXFM00_ST', 'STAGE', 'EXIM_XXXXFM00_ST', TRUE, TO_DATE('2024-04-15', 'yyyy-mm-dd'));
+END;
+
+select rowid, test_steps.* from test_steps where id = 3;
+BEGIN
+TABLECOPY_PACKAGE.TABLECOPY('STAGE', 'KAPITI_C8PF', 'STAGE', 'KAPITI_C8PF', TRUE, TO_DATE('2024-04-15', 'yyyy-mm-dd'));
+END;
+STAGE.KAPITI_C8PF
+
+select rowid, test_steps.* from test_steps where id = 4;
+BEGIN
+TABLECOPY_PACKAGE.TABLECOPY('STA', 'EXIM_STFIFMAC', 'STA', 'EXIM_STFIFMAC', TRUE, TO_DATE('2024-04-15', 'yyyy-mm-dd'));
+END;
+
+select rowid, test_steps.* from test_steps where id = 5;
+begin
+   STA.TR_EXIMBILLS.EXIM_XXXXFM00;
+end;
+----------------------------------------------------testing one at a time:
+select rowid, test_steps.* from test_steps where id = 1;
+BEGIN
+TABLECOPY_PACKAGE.TABLECOPY('STAGE', 'EXIM_XXXXFM00_ST', 'STAGE', 'EXIM_XXXXFM00_ST', TRUE, TO_DATE('2024-04-15', 'yyyy-mm-dd'));
+END;
